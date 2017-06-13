@@ -1,0 +1,21 @@
+{
+  "secure": {
+    "cipher": "aes256",
+    "password": "go"
+  },
+  "navbar": {
+    "public": true,
+    "title": "tim.stello",
+    "image": "https://lh3.googleusercontent.com/-ZFYuVfqKoIA/AAAAAAAAAAI/AAAAAAAAAAA/AAyYBF6RdKF5SHu-O-Z7UDEQlms4e6rGeQ/s32-c-mo/photo.jpg"
+  },
+  "user": {
+    "first": "Tim",
+    "last": "Stello"
+  },
+  "github": {
+    "profile": "https://github.com/taemon1337"
+  },
+  "twitter": {
+    "profile": "https://twitter.com/taemon1337"
+  }
+}
