@@ -22,5 +22,41 @@
   },
   "twitter": {
     "profile": "https://twitter.com/taemon1337"
+  },
+  "pages": {
+    "home": {
+      "title": "Home",
+      "sections": [
+        {
+          "component": "d-level",
+          "props": {
+            "items": [
+              {
+                "heading": "Email Address",
+                "content": "timstello@gmail.com"
+              },
+              {
+                "heading": " ",
+                "content": "Timothy Stello"
+              },
+              {
+                "heading": "Phone Number",
+                "content": "443.333.9115"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "references": {
+      "sections": [
+        {
+          "component": "d-card",
+          "props": {
+            "title": "Here are some references"
+          }
+        }
+      ]
+    }
   }
 }

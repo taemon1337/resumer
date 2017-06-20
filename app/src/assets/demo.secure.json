@@ -19,5 +19,11 @@
   },
   "twitter": {
     "profile": "https://twitter.com"
+  },
+  "pages": {
+    "home": {},
+    "test": {},
+    "about": {},
+    "ask a question": {}
   }
 }

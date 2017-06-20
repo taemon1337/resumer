@@ -26,6 +26,7 @@ const getters = {
   [DataTypes.user]: state => state.data.user,
   [DataTypes.github]: state => state.data.github,
   [DataTypes.twitter]: state => state.data.twitter,
+  [DataTypes.pages]: state => state.data.pages,
   [DataTypes.decrypted]: state => state.decrypted
 }
 
@@ -44,13 +45,9 @@ const actions = {
 
 // mutations must be synchronous
 const mutations = {
-  [DataTypes.init] (state, data) {
-    if (data.user) { state.data.user = data.user }
-    if (data.github) { state.data.github = data.github }
-    if (data.twitter) { state.data.twitter = data.twitter }
-  },
   [DataTypes.load] (state, opts) {
     try {
+      store.dispatch(MessageTypes.clear)
       let merged = Object.assign({}, state.all[opts.index])
       if (opts.password) { merged.secure = Object.assign({}, { password: opts.password }) }
       let json = cryptor.loader(JSON.stringify(merged), true)

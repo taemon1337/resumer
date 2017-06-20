@@ -12,13 +12,9 @@
   import 'bulma'
   import Navbar from '@/components/Navbar'
   import ErrorMessages from '@/components/ErrorMessages'
-  import { DataTypes } from '@/store/mutation-types'
 
   export default {
     name: 'app',
-    beforeCreate () {
-      this.$store.dispatch(DataTypes.init)
-    },
     components: {
       Navbar,
       ErrorMessages

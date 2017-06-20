@@ -16,6 +16,9 @@ const actions = {
   },
   [MessageTypes.remove] ({ commit }, idx) {
     commit(MessageTypes.remove, idx)
+  },
+  [MessageTypes.clear] ({ commit }) {
+    commit(MessageTypes.clear)
   }
 }
 
@@ -30,6 +33,9 @@ const mutations = {
   },
   [MessageTypes.remove] (state, idx) {
     state.all.splice(idx, 1)
+  },
+  [MessageTypes.clear] (state, idx) {
+    state.all = []
   }
 }
 
