@@ -1,5 +1,5 @@
 <template>
-  <nav class="nav">
+  <nav class="nav" v-if='decrypted'>
     <div class="nav-left">
       <a class="nav-item" v-if="navbar.image">
         <img :src='navbar.image' :alt='navbar.title'>
@@ -63,6 +63,13 @@
           </p>
         </div>
       </div>
+      
+      <a v-if='decrypted' @click='relock' class="nav-item is-tab" title='Re-Lock the site data'>
+        <span>Logout</span>
+        <span class='icon'>
+          <i class='fa fa-lock'></i>
+        </span>
+      </a>
     </div>
   </nav>
 </template>
@@ -81,13 +88,19 @@
         user: DataTypes.user,
         navbar: DataTypes.navbar,
         github: DataTypes.github,
-        twitter: DataTypes.twitter
+        twitter: DataTypes.twitter,
+        decrypted: DataTypes.decrypted
       }),
       computedGithubTitle () {
         return this.user.first + '"s Github profile'
       },
       computedTwitterTitle () {
         return this.user.first + '"s Twitter profile'
+      }
+    },
+    methods: {
+      relock () {
+        this.$store.dispatch(DataTypes.lock)
       }
     }
   }

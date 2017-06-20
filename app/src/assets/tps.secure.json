@@ -1,4 +1,9 @@
 {
+  "meta": {
+    "public": true,
+    "name": "Tim's",
+    "description": "Tim's personal resume site"
+  },
   "secure": {
     "cipher": "aes256",
     "password": "go"

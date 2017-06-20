@@ -1,0 +1,23 @@
+{
+  "secure": false,
+  "meta": {
+    "public": true,
+    "name": "Demo Site",
+    "description": "This site access key is 'demo'."
+  },
+  "navbar": {
+    "public": true,
+    "title": "Demo Site",
+    "image": "http://bulma.io/images/bulma-logo.png"
+  },
+  "user": {
+    "first": "Johnny",
+    "last": "Testie"
+  },
+  "github": {
+    "profile": "https://github.com"
+  },
+  "twitter": {
+    "profile": "https://twitter.com"
+  }
+}

@@ -2,6 +2,7 @@
   <div class='container'>
     <div id="app">
       <navbar></navbar>
+      <error-messages></error-messages>
       <router-view></router-view>
     </div>
   </div>
@@ -10,16 +11,17 @@
 <script>
   import 'bulma'
   import Navbar from '@/components/Navbar'
+  import ErrorMessages from '@/components/ErrorMessages'
   import { DataTypes } from '@/store/mutation-types'
 
   export default {
     name: 'app',
     beforeCreate () {
-      console.log('loading...', DataTypes)
-      // this.$store.dispatch(DataTypes.load)
+      this.$store.dispatch(DataTypes.init)
     },
     components: {
-      Navbar
+      Navbar,
+      ErrorMessages
     }
   }
 </script>

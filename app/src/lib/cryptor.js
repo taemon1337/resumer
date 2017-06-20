@@ -1,4 +1,4 @@
-let crypto = require('crypto')
+const crypto = require('crypto')
 
 let defaults = {
   cipher: 'aes256',
@@ -19,7 +19,7 @@ let decrypt = function (str, opts) {
   return cleartext
 }
 
-module.exports = function (content, decryption) {
+let loader = function (content, decryption) {
   if (typeof content === 'string') { content = JSON.parse(content) }
   let cleartext = {}
   let enciphered = {}
@@ -42,7 +42,7 @@ module.exports = function (content, decryption) {
           cleartext[key] = child // any root level child with a truthy 'public' key will be left in the clear
         } else {
           if (decryption) {
-            enciphered[key] = decrypt(JSON.stringify(child), sec) // if in decrypt mode on client
+            enciphered[key] = JSON.parse(decrypt(child, sec)) // if in decrypt mode on client
           } else {
             enciphered[key] = encrypt(JSON.stringify(child), sec) // else it will be encrypted
           }
@@ -54,4 +54,10 @@ module.exports = function (content, decryption) {
   } else {
     return JSON.stringify(content)
   }
+}
+
+export default {
+  loader: loader,
+  encrypt: encrypt,
+  decrypt: decrypt
 }

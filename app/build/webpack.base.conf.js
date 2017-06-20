@@ -69,6 +69,7 @@ module.exports = {
       {
         test: /\.secure\.json$/,
         use: [
+          'json-loader',
           'secure-loader'
         ]
       }

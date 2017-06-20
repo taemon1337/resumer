@@ -1,65 +1,69 @@
-import { DataTypes } from '../mutation-types'
-// import axios from 'axios'
-import pbkdf2 from 'pbkdf2'
+import { DataTypes, MessageTypes } from '../mutation-types'
+import store from '@/store'
+import cryptor from '@/lib/cryptor'
 
-console.log('DATA ', require('@/assets/data.secure.json'))
-console.log('IMG', require('@/assets/logo.png'))
+const defaultindex = 0
 
-// https://github.com/crypto-browserify/pbkdf2/blob/master/lib/sync.js
-let key = pbkdf2.pbkdf2Sync('go', 'my-random-static-site-salt', 1, 64, 'sha512')
-console.log('KEY: ', Buffer.from(key).toString('hex'))
-
-// init state
 const state = {
-  navbar: {
-    public: true,
-    title: 'My Site',
-    image: 'http://bulma.io/images/bulma-logo.png'
+  all: [
+    require('@/assets/demo.secure.json'),
+    require('@/assets/tps.secure.json')
+  ],
+  current: defaultindex,
+  data: {
+    navbar: {},
+    user: {},
+    github: {},
+    twitter: {}
   },
-  secure: {
-    cipher: 'aes256',
-    password: 'go'
-  },
-  user: {
-    first: 'John',
-    last: 'Tester'
-  },
-  github: {
-    profile: 'https://github.com/'
-  },
-  twitter: {
-    profile: 'https://twitter.com'
-  }
+  decrypted: false
 }
 
 // getters
 const getters = {
-  [DataTypes.all]: state => state,
-  [DataTypes.navbar]: state => state.navbar,
-  [DataTypes.user]: state => state.user,
-  [DataTypes.github]: state => state.github,
-  [DataTypes.twitter]: state => state.twitter
+  [DataTypes.all]: state => state.all,
+  [DataTypes.navbar]: state => state.data.navbar,
+  [DataTypes.user]: state => state.data.user,
+  [DataTypes.github]: state => state.data.github,
+  [DataTypes.twitter]: state => state.data.twitter,
+  [DataTypes.decrypted]: state => state.decrypted
 }
 
 // actions
 const actions = {
-  [DataTypes.load] ({ commit }) {
-    commit(DataTypes.load, state)
-    // return axios.get('/static/data.json').then(function (resp) {
-    //   commit(DataTypes.load, resp.data)
-    // })
-    // .catch(function (err) {
-    //   console.warn('Error loading data...', err)
-    // })
+  [DataTypes.init] ({ commit }) {
+    commit(DataTypes.init, state)
+  },
+  [DataTypes.load] ({ commit }, opts) {
+    commit(DataTypes.load, opts)
+  },
+  [DataTypes.lock] ({ commit }) {
+    commit(DataTypes.lock)
   }
 }
 
 // mutations must be synchronous
 const mutations = {
-  [DataTypes.load] (state, data) {
-    if (data.user) { state.user = data.user }
-    if (data.github) { state.github = data.github }
-    if (data.twitter) { state.twitter = data.twitter }
+  [DataTypes.init] (state, data) {
+    if (data.user) { state.data.user = data.user }
+    if (data.github) { state.data.github = data.github }
+    if (data.twitter) { state.data.twitter = data.twitter }
+  },
+  [DataTypes.load] (state, opts) {
+    try {
+      let merged = Object.assign({}, state.all[opts.index])
+      if (opts.password) { merged.secure = Object.assign({}, { password: opts.password }) }
+      let json = cryptor.loader(JSON.stringify(merged), true)
+      state.data = JSON.parse(json)
+      state.decrypted = true
+      store.dispatch(MessageTypes.add, { title: 'Successfully unlocked site data!', class: 'notification is-success' })
+    } catch (err) {
+      store.dispatch(MessageTypes.add, { title: 'Error: are you sure that is the correct access token?', class: 'notification is-danger', content: err.toString() })
+    }
+  },
+  [DataTypes.lock] (state) {
+    state.data = state.all[defaultindex]
+    state.decrypted = false
   }
 }
 
