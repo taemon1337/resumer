@@ -11,7 +11,7 @@
   "navbar": {
     "public": true,
     "title": "tim.stello",
-    "image": "https://lh3.googleusercontent.com/-ZFYuVfqKoIA/AAAAAAAAAAI/AAAAAAAAAAA/AAyYBF6RdKF5SHu-O-Z7UDEQlms4e6rGeQ/s32-c-mo/photo.jpg"
+    "image": "https://lh3.googleusercontent.com/-ZFYuVfqKoIA/AAAAAAAAAAI/AAAAAAAAAAA/AAyYBF6RdKF5SHu-O-Z7UDEQlms4e6rGeQ/s128-c-mo/photo.jpg"
   },
   "user": {
     "first": "Tim",
@@ -24,26 +24,252 @@
     "profile": "https://twitter.com/taemon1337"
   },
   "pages": {
-    "home": {
-      "title": "Home",
+    "info": {
       "sections": [
         {
           "component": "d-level",
           "props": {
             "items": [
               {
-                "heading": "Email Address",
-                "content": "timstello@gmail.com"
+                "heading": "",
+                "class": "is-pulled-left",
+                "content": "<figure class='image is-64x64'><img class='circle' src='https://lh3.googleusercontent.com/-ZFYuVfqKoIA/AAAAAAAAAAI/AAAAAAAAAAA/AAyYBF6RdKF5SHu-O-Z7UDEQlms4e6rGeQ/s64-c-mo/photo.jpg'></figure>"
               },
               {
-                "heading": " ",
+                "heading": "",
+                "class": "title",
                 "content": "Timothy Stello"
               },
               {
+                "heading": "",
+                "content": ""
+              },
+              {
+                "heading": "Email Address",
+                "class": "size-14 is-bold",
+                "content": "timstello@gmail.com"
+              },
+              {
                 "heading": "Phone Number",
+                "class": "size-14 is-bold",
                 "content": "443.333.9115"
+              },
+              {
+                "heading": "Address",
+                "class": "size-12",
+                "content": "2361 Rutland Rd.<br> Davidsonville, MD  21035"
               }
             ]
+          }
+        }
+      ]
+    },
+    "skills": {
+      "sections": [
+        {
+          "component": "render-pages",
+          "props": {
+            "pages": {
+              "webdev": {
+                "title": "Web Development",
+                "sections": [
+                  {
+                    "component": "d-media",
+                    "props": {
+                      "left": {
+                        
+                      },
+                      "content": "<p class='title'>Experience with HTML5, CSS3, and Javascript</p>",
+                      "children": [
+                        {
+                          "left": {
+                            "class": "image is-128x128",
+                            "src": "/static/javascript-logo.png"
+                          },
+                          "content": "<p class='subtitle is-bold'>Javascript</p>",
+                          "children": [
+                            {
+                              "left": {
+                                "class": "image is-64x64",
+                                "src": "https://vuejs.org/images/logo.png"
+                              },
+                              "content": "Vue 2 Framework"
+                            },
+                            {
+                              "left": {
+                                "class": "image is-64x64",
+                                "src": "http://riotjs.com/img/logo/riot240x.png"
+                              },
+                              "subtitle": {
+                                "text": "Riot JS Framework",
+                                "href": "http://riotjs.com"
+                              },
+                              "content": "Simple and elegant component-based UI library"
+                            }
+                          ]
+                        },
+                        {
+                          "left": {
+                            "class": "image is-128x128",
+                            "src": "/static/css-logo.png"
+                          },
+                          "content": "<p class='subtitle is-bold'>CSS</p>",
+                          "children": [
+                            {
+                              "left": {
+                                "class": "image is-64x64",
+                                "src": "data:image/png;base64,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"
+                              },
+                              "content": "Bootstrap Framework"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              "development": {
+                "title": "Other Development",
+                "sections": [
+                  {
+                    "component": "d-card",
+                    "props": {
+                      "content": "This is a test."
+                    }
+                  }
+                ]
+              },
+              "security": {
+                "title": "Computer Security",
+                "sections": [
+                  {
+                    "component": "d-card",
+                    "props": {
+                      "content": "This is a test."
+                    }
+                  }
+                ]
+              },
+              "devops": {
+                "title": "Development Operations",
+                "sections": [
+                  {
+                    "component": "d-level",
+                    "props": {
+                      "items": [
+                        {
+                          "heading": "DevOpts",
+                          "class": "title",
+                          "content": "Development Operations"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "professional": {
+      "title": "Job History",
+      "sections": [
+        {
+          "component": "d-level",
+          "props": {
+            "items": [
+              {
+                "heading": "",
+                "class": "title",
+                "content": "Messiah College (2007)"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "education": {
+      "sections": [
+        {
+          "component": "d-level",
+          "props": {
+            "items": [
+              {
+                "heading": "",
+                "class": "title",
+                "content": "Messiah College (2007)"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "personal": {
+      "sections": [
+        {
+          "component": "d-card",
+          "props": {
+            "header": {
+              "href": "",
+              "title": "My Family Life",
+              "icon": "fa fa-home"
+            },
+            "image": {
+              "class": "image is-square",
+              "src": "https://lh3.googleusercontent.com/-ZFYuVfqKoIA/AAAAAAAAAAI/AAAAAAAAAAA/AAyYBF6RdKF5SHu-O-Z7UDEQlms4e6rGeQ/s128-c-mo/photo.jpg",
+              "alt": "Family Life"
+            },
+            "content": "I have a wife and 2 children."
+          }
+        },
+        {
+          "component": "d-card",
+          "props": {
+            "header": {
+              "href": "https://github.com/taemon1337",
+              "title": "My Github Projects",
+              "icon": "fa fa-github"
+            },
+            "image": {
+              "class": "image is-square",
+              "src": "https://avatars2.githubusercontent.com/u/2095857?v=3&s=460",
+              "alt": "Developer"
+            },
+            "content": "Computer Programming"
+          }
+        },
+        {
+          "component": "d-card",
+          "props": {
+            "header": {
+              "href": "https://github.com/taemon1337",
+              "title": "I like sports",
+              "icon": "fa fa-soccer-ball-o fa-spin"
+            },
+            "image": {
+              "class": "image is-3x2",
+              "src": "http://media.gettyimages.com/photos/forward-josh-sanders-left-of-messiah-college-celebrates-his-second-picture-id640563798",
+              "alt": "sports"
+            },
+            "content": "I like to play sports like soccer, table tennis, golf, and pretty much all others too."
+          }
+        },
+        {
+          "component": "d-card",
+          "props": {
+            "header": {
+              "href": "https://stellarriding.com",
+              "title": "My Farm Life",
+              "icon": "fa fa-external-link"
+            },
+            "image": {
+              "class": "image is-square",
+              "src": "http://www.stellarriding.com/uploads/1/2/0/0/12000931/14591579-1379994968692487-475802265699088439-n_orig.jpg",
+              "alt": "Family Life"
+            },
+            "content": "I live on a horse farm"
           }
         }
       ]
@@ -51,9 +277,28 @@
     "references": {
       "sections": [
         {
-          "component": "d-card",
+          "component": "d-tiles",
           "props": {
-            "title": "Here are some references"
+            "items": [
+              {
+                "title": "Professional Friend John says...",
+                "content": "Tim sucks, don't hire him!"
+              },
+              {
+                "title": "Personal Friend says...",
+                "content": "No, really, do <strong>NOT</strong> hire this bozo, he will ruin your entire company and steal your wife!"
+              },
+              {
+                "title": "Childhood friend says...",
+                "content": "I one time told Tim that he was being mean to a neighborhood cat, so he stopped being mean to the cat.  The next week my family went on vacation for 2 weeks, Tim threw the cat through my bedroom window where it spent the entire 2 weeks bleeding to death.  I realized later that Tim had given the cat a laxative as well.  We had to move.  Please run as far away from this person as humanly possible."
+              }
+            ]
+          },
+          "slot": {
+            "component": "d-tile",
+            "props": {
+              "colors": ["is-success", "is-warning", "is-danger", "is-info", "is-primary"]
+            }
           }
         }
       ]

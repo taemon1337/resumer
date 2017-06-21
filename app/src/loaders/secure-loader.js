@@ -20,6 +20,7 @@ let decrypt = function (str, opts) {
 }
 
 module.exports = function (content, decryption) {
+  this.cacheable()
   if (typeof content === 'string') { content = JSON.parse(content) }
   let cleartext = {}
   let enciphered = {}

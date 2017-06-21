@@ -38,7 +38,7 @@
         </aside>
       </div>
       <div class='column is-three-quarters'>
-        <div v-if='!decrypted' class="tile">
+        <div v-if='!decrypted' class="column tile">
           <div v-for='(site, index) in sites' key='index' class="tile is-parent is-vertical">
             <article class="tile is-child notification is-warning">
               <p class="title">
@@ -62,8 +62,8 @@
             </article>
           </div>
         </div>
-        <div v-else>
-          <render-pages :pages='pages || []'></render-pages>
+        <div v-else class='column'>
+          <render-pages :pages='pages'></render-pages>
         </div>
       </div>
     </div>

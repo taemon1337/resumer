@@ -1,9 +1,9 @@
 <template>
-  <nav class='level is-mobile'>
+  <nav class='level'>
     <div v-for='(item, index) in items' key='index' class='level-item has-text-centered'>
       <div>
         <p class="heading">{{ item.heading }}</p>
-        <p class="title">{{ item.content }}</p>
+        <p :class="item.class" v-html='item.content'></p>
       </div>
     </div>
   </nav>

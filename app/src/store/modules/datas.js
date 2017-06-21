@@ -33,7 +33,11 @@ const getters = {
 // actions
 const actions = {
   [DataTypes.init] ({ commit }) {
-    commit(DataTypes.init, state)
+    let currentkey = sessionStorage.getItem('currentKey')
+    let accesskey = sessionStorage.getItem('currentToken')
+    if (currentkey) {
+      commit(DataTypes.load, { index: currentkey, password: accesskey })
+    }
   },
   [DataTypes.load] ({ commit }, opts) {
     commit(DataTypes.load, opts)
@@ -53,6 +57,8 @@ const mutations = {
       let json = cryptor.loader(JSON.stringify(merged), true)
       state.data = JSON.parse(json)
       state.decrypted = true
+      sessionStorage.setItem('currentKey', opts.index)
+      sessionStorage.setItem('currentToken', opts.password)
       store.dispatch(MessageTypes.add, { title: 'Successfully unlocked site data!', class: 'notification is-success' })
     } catch (err) {
       store.dispatch(MessageTypes.add, { title: 'Error: are you sure that is the correct access token?', class: 'notification is-danger', content: err.toString() })
@@ -61,6 +67,8 @@ const mutations = {
   [DataTypes.lock] (state) {
     state.data = state.all[defaultindex]
     state.decrypted = false
+    sessionStorage.removeItem('currentKey')
+    sessionStorage.removeItem('currentToken')
   }
 }
 

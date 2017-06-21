@@ -1,4 +1,5 @@
 export const DataTypes = {
+  init: 'data.init',
   load: 'data.load',
   all: 'data.all',
   navbar: 'data.navbar',

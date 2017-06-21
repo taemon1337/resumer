@@ -1,16 +1,22 @@
 <template>
   <div>
-    <nav class='level'>
-    <p v-for='(page, key) in pages' key='key' class="level-item has-text-centered">
-      <a @click='active=key' class="link is-info">{{ page.title || key | capitalize }}</a>
-    </p>
-  </nav>
-    <section class='section' v-if='active'>
-      <render-page :name='active' :page='pages[active]'></render-page>
-    </section>
-    <section class='section' v-else>
-      Click a page to open it.
-    </section>
+    <nav class='nav has-shadow'>
+      <div class='container'>
+        <div class='nav-left nav-menu'>
+          <a v-for='(page, key) in pages' key='key' :class='navItemClass(key)' @click='active=key'>
+            {{ page.title || key | capitalize }}
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div>
+      <div class='column' v-if='active'>
+        <render-page :name='active' :page='pages[active]'></render-page>
+      </div>
+      <div v-else>
+        Click a page to open it.
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,6 +34,17 @@
     data () {
       return {
         active: null
+      }
+    },
+    methods: {
+      navItemClass (item) {
+        return item === this.active ? 'nav-item is-tab is-active' : 'nav-item is-tab'
+      }
+    },
+    mounted () {
+      let keys = Object.keys(this.pages)
+      if (keys.length) {
+        this.active = keys[0]
       }
     },
     components: {

@@ -12,9 +12,13 @@
   import 'bulma'
   import Navbar from '@/components/Navbar'
   import ErrorMessages from '@/components/ErrorMessages'
+  import { DataTypes } from '@/store/mutation-types'
 
   export default {
     name: 'app',
+    created () {
+      this.$store.dispatch(DataTypes.init)
+    },
     components: {
       Navbar,
       ErrorMessages
@@ -46,4 +50,40 @@
   
   // 4. Import the rest of Bulma
   @import "node_modules/bulma/bulma"
+</style>
+
+<style>
+  .has-shadow {
+    box-shadow:0 2px 3px rgba(10, 10, 10, 0.1);
+  }
+  .is-bold {
+    font-weight: bold;
+  }
+  .is-italic {
+    font-style: italic;
+  }
+  .size-8 {
+    font-size:8px;
+  }
+  .size-10 {
+    font-size:10px;
+  }
+  .size-12 {
+    font-size:12px;
+  }
+  .size-14 {
+    font-size:14px;
+  }
+  .size-16 {
+    font-size:16px;
+  }
+  .size-18 {
+    font-size:18px;
+  }
+  .size-20 {
+    font-size:20px;
+  }
+  img.circle {
+    border-radius: 50%
+  }
 </style>
