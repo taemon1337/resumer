@@ -89,7 +89,7 @@
                           "subtitle": {
                             "href": "https://www.w3schools.com/Js/"
                           },
-                          "content": "",
+                          "content": "<h1 class='title'>Javascript</h1>",
                           "children": [
                             {
                               "left": {
@@ -159,7 +159,7 @@
                           "subtitle": {
                             "href": "https://www.w3schools.com/css/"
                           },
-                          "content": "",
+                          "content": "<h1 class='title'>CSS Styling</h1>",
                           "children": [
                             {
                               "left": {
@@ -217,7 +217,7 @@
                           "subtitle": {
                             "href": "https://nodejs.org"
                           },
-                          "content": "",
+                          "content": "<h1 class='title'>Node JS</h1>",
                           "children": [
                             {
                               "left": {
@@ -285,7 +285,7 @@
                           "subtitle": {
                             "href": "https://www.ruby-lang.org"
                           },
-                          "content": "",
+                          "content": "<h1 class='title'>Ruby</h1>",
                           "children": [
                             {
                               "left": {
@@ -324,7 +324,7 @@
                           "subtitle": {
                             "href": "https://www.python.org/"
                           },
-                          "content": "",
+                          "content": "<h1 class='title'>Python</h1>",
                           "children": [
                             {
                               "left": {
@@ -369,7 +369,7 @@
                           "subtitle": {
                             "href": "https://www.java.com"
                           },
-                          "content": "",
+                          "content": "<h1 class='title'>Java</h1>",
                           "children": [
                             {
                               "left": {
@@ -541,18 +541,66 @@
         {
           "component": "d-card",
           "props": {
-            "cardClass": "card is-fullwidth",
-            "content": "<p class='title'>Bachelor of Science in Computer Engineering</p>",
+            "content": "<p class='hero title'>Education and Certifications</p>",
             "child": {
-              "left": {
-                "class": "image is-3x2",
-                "src": "http://www.messiah.edu/site/images/logo.png"
-              },
-              "subtitle": {
-                "text": "Messiah College, Grantham, PA. Graduated May 2007.",
-                "href": "http://www.messiah.edu"
-              },
-              "content": " "
+              "content": " ",
+              "children": [
+                {
+                  "left": {
+                    "class": "image is-256x256",
+                    "src": "http://www.messiah.edu/site/images/logo.png"
+                  },
+                  "subtitle": {
+                    "text": "Bachelor of Science in Computer Engineering",
+                    "href": "http://www.messiah.edu"
+                  },
+                  "content": "Messiah College, Grantham, PA. Graduated May 2007."
+                },
+                {
+                  "left": {
+                    "class": "image is-128x128",
+                    "src": "https://cert.eccouncil.org/images/CEH-logo.png"
+                  },
+                  "subtitle": {
+                    "text": "Certified Ethical Hacker",
+                    "href": "https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/"
+                  },
+                  "content": "CEHv6 [2010]"
+                },
+                {
+                  "left": {
+                    "class": "image is-128x128",
+                    "src": "http://randycannon.com/wp-content/uploads/2016/03/cisco-ccna-logo.jpg"
+                  },
+                  "subtitle": {
+                    "text": "Cisco Certified Network Associate",
+                    "href": "http://www.cisco.com/c/en/us/training-events/training-certifications/certifications/associate/ccna-routing-switching.html"
+                  },
+                  "content": "CCNA [2010]"
+                },
+                {
+                  "left": {
+                    "class": "image is-128x128",
+                    "src": "https://seeklogo.com/images/P/pmp-logo-98FBCB2BA7-seeklogo.com.gif"
+                  },
+                  "subtitle": {
+                    "text": "Project Management Professional",
+                    "href": "https://www.pmi.org/certifications/types/project-management-pmp"
+                  },
+                  "content": "PMP [2010]"
+                },
+                {
+                  "left": {
+                    "class": "image is-128x128",
+                    "src": "data:image/png;base64,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"
+                  },
+                  "subtitle": {
+                    "text": "Security + Certified",
+                    "href": "https://certification.comptia.org/certifications/security"
+                  },
+                  "content": "Security+ [2010]"
+                }
+              ]
             }
           },
           "slot": {

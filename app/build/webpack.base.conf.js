@@ -48,7 +48,8 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
+        include: [resolve('src'), resolve('test')],
+        exclude: /\.secure\.js$/
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -71,6 +72,13 @@ module.exports = {
         use: [
           'json-loader',
           'secure-loader'
+        ]
+      },
+      {
+        test: /\.secure\.js$/,
+        use: [
+          'secure-js-loader',
+          'babel-loader'
         ]
       }
     ]
