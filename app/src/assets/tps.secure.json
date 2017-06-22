@@ -84,7 +84,7 @@
                         {
                           "left": {
                             "class": "image is-128x128",
-                            "src": "/static/javascript-logo.png"
+                            "src": "./static/javascript-logo.png"
                           },
                           "subtitle": {
                             "href": "https://www.w3schools.com/Js/"
@@ -154,7 +154,7 @@
                         {
                           "left": {
                             "class": "image is-128x128",
-                            "src": "/static/css-logo.png"
+                            "src": "./static/css-logo.png"
                           },
                           "subtitle": {
                             "href": "https://www.w3schools.com/css/"
@@ -212,7 +212,7 @@
                         {
                           "left": {
                             "class": "image is-128x128",
-                            "src": "/static/nodejs-logo.png"
+                            "src": "./static/nodejs-logo.png"
                           },
                           "subtitle": {
                             "href": "https://nodejs.org"
@@ -280,7 +280,7 @@
                         {
                           "left": {
                             "class": "image is-128x128",
-                            "src": "/static/ruby-logo.png"
+                            "src": "./static/ruby-logo.png"
                           },
                           "subtitle": {
                             "href": "https://www.ruby-lang.org"
@@ -319,7 +319,7 @@
                         {
                           "left": {
                             "class": "image is-128x128",
-                            "src": "/static/python-logo.png"
+                            "src": "./static/python-logo.png"
                           },
                           "subtitle": {
                             "href": "https://www.python.org/"
@@ -340,7 +340,7 @@
                             {
                               "left": {
                                 "class": "image is-64x64",
-                                "src": "http://flask.pocoo.org/static/logo/flask.png"
+                                "src": "http://flask.pocoo.org./static/logo/flask.png"
                               },
                               "subtitle": {
                                 "text": "Flask (A Python Microframework)",
@@ -364,7 +364,7 @@
                         {
                           "left": {
                             "class": "image is-128x128",
-                            "src": "/static/java-logo.png"
+                            "src": "./static/java-logo.png"
                           },
                           "subtitle": {
                             "href": "https://www.java.com"
