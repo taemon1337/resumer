@@ -53,6 +53,9 @@
 </style>
 
 <style>
+  .is-round {
+    border-radius: 50%;
+  }
   .has-shadow {
     box-shadow:0 2px 3px rgba(10, 10, 10, 0.1);
   }
@@ -83,7 +86,7 @@
   .size-20 {
     font-size:20px;
   }
-  img.circle {
-    border-radius: 50%
+  .nav-item img {
+    max-height: 3.1rem;
   }
 </style>

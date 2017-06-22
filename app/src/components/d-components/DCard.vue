@@ -1,5 +1,5 @@
 <template>
-  <div class='card'>
+  <div :class="cardClass">
     <header v-if="header" class='card-header'>
       <p v-if="header.title" class="card-header-title">{{ header.title }}</p>
       <a v-if="header.icon" class='card-header-icon' :href="header.href || '#'" target='_blank'>
@@ -25,6 +25,7 @@
       </div>
   
       <div class="content" v-html="content"></div>
+      <slot v-if="child" v-bind='child'></slot>
     </div>
     <footer v-if="footer" class="card-footer">
       <a v-for="(foot, index) in footer" key='index' class='card-footer-item' target='_blank' :href="foot.href || '#'">{{ foot.text }}</a>
@@ -36,6 +37,10 @@
   export default {
     name: 'DCard',
     props: {
+      cardClass: {
+        type: String,
+        default: 'card'
+      },
       content: {
         required: true,
         type: String
@@ -50,6 +55,9 @@
         type: Object
       },
       media: {
+        type: Object
+      },
+      child: {
         type: Object
       }
     },

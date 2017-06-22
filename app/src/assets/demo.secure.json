@@ -8,7 +8,9 @@
   "navbar": {
     "public": true,
     "title": "Demo Site",
-    "image": "http://bulma.io/images/bulma-logo.png"
+    "image": {
+      "src": "http://bulma.io/images/bulma-logo.png"
+    }
   },
   "user": {
     "first": "Johnny",

@@ -2,7 +2,7 @@
   <nav class="nav" v-if='decrypted'>
     <div class="nav-left">
       <a class="nav-item" v-if="navbar.image">
-        <img class='circle' :src='navbar.image' :alt='navbar.title'>
+        <img :class='navbar.image.class' :src='navbar.image.src' :alt='navbar.title'>
       </a>
       <a class="nav-item" v-if="navbar.title">
         {{ navbar.title }}
