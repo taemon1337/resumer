@@ -1,6 +1,6 @@
 <template>
-  <div class='columns has-shadow'>
-    <div class='column' v-for='(section, index) in page.sections' key='index'>
+  <div class='columns is-multiline has-shadow'>
+    <div v-for='(section, index) in page.sections' key='index' :class="section.class || 'column'">
       <component v-if='section.component' :is="section.component" v-bind="section.props">
         <template v-if="section.slot" scope='props'>
           <component :is='section.slot.component' v-bind="mergeProps(section.slot.props, props)"></component>

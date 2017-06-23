@@ -6,6 +6,10 @@ import router from './router'
 import store from './store'
 import Vue2Filters from 'vue2-filters'
 
+import jsdb from '@/jsdb'
+console.log(jsdb)
+window.jsdb = jsdb
+
 Vue.use(Vue2Filters)
 Vue.config.productionTip = false
 
