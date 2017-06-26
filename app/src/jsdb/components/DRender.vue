@@ -1,11 +1,8 @@
 <template>
   <div :class="klass">
     <component :is='component' v-bind="properties">
-      <div v-if='slots'>
-        SLOTS: {{ slots }}
-        <div v-for="(prop, name) in slots" key='name' :slot='name' scope='props'>
-          <d-render v-bind='prop'></d-render>
-        </div>
+      <div v-if='slots' v-for="(prop, name) in slots" key='name' :slot='name' scope='props'>
+        <d-render v-bind='prop'></d-render>
       </div>
     </component>
     <div v-if="children.length">
@@ -17,8 +14,6 @@
 </template>
 
 <script>
-  // import { mapGetters } from 'vuex'
-
   export default {
     name: 'DRender',
     props: {

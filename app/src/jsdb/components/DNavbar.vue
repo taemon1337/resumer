@@ -1,15 +1,20 @@
 <template>
   <nav class='nav'>
     <div v-if="left" class="nav-left">
-      <d-navbar-item v-bind="left"></d-navbar-item>
+      <d-navbar-item v-for='(item, index) in left' key='index' v-bind="item"></d-navbar-item>
       <slot name="left" scope="left"></slot>
     </div>
     <div v-if="center" class="nav-center">
-      <d-navbar-item v-bind="center"></d-navbar-item>
+      <d-navbar-item v-for='(item, index) in center' key='index' v-bind="item"></d-navbar-item>
       <slot name="left" scope="center"></slot>
     </div>
-    <div v-if="right" class="nav-right">
-      <d-navbar-item v-bind="right"></d-navbar-item>
+    <span class="nav-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+    <div v-if="right" class="nav-right nav-menu">
+      <d-navbar-item v-for='(item, index) in right' key='index' v-bind="item"></d-navbar-item>
       <slot name="left" scope="right"></slot>
     </div>
   </nav>
@@ -20,13 +25,13 @@
     name: 'DNavbar',
     props: {
       left: {
-        type: Object
+        type: Array
       },
       center: {
-        type: Object
+        type: Array
       },
       right: {
-        type: Object
+        type: Array
       }
     },
     data () {

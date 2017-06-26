@@ -73,13 +73,6 @@ module.exports = {
           'json-loader',
           'secure-loader'
         ]
-      },
-      {
-        test: /\.secure\.js$/,
-        use: [
-          'secure-js-loader',
-          'babel-loader'
-        ]
       }
     ]
   }

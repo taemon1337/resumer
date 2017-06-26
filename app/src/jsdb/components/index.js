@@ -4,12 +4,22 @@ import DRender from './DRender'
 import DNavbar from './DNavbar'
 import DNavbarItem from './DNavbarItem'
 import DSection from './DSection'
+import DTabs from './DTabs'
+import DGroup from './DGroup'
+import DLevel from './DLevel'
+import DHeading from './DHeading'
+import DImage from './DImage'
 
 export default {
-  DApp: DApp,
-  DLayout: DLayout,
-  DRender: DRender,
-  DNavbar: DNavbar,
-  DNavbarItem: DNavbarItem,
-  DSection: DSection
+  DApp,
+  DLayout,
+  DRender,
+  DGroup,
+  DNavbar,
+  DNavbarItem,
+  DSection,
+  DTabs,
+  DLevel,
+  DHeading,
+  DImage
 }

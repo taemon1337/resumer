@@ -53,7 +53,7 @@
 </style>
 
 <style>
-  .is-round {
+  .is-round, .is-round img {
     border-radius: 50%;
   }
   .has-shadow {

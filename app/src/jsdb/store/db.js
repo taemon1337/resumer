@@ -1,10 +1,26 @@
 let state = {
   app: {
-    name: 'tim.stello.org'
+    name: 'Demo Site'
+  },
+  github: {
+    href: 'https://github.com'
+  },
+  twitter: {
+    href: 'https://twitter.com'
   },
   navbar: {
-    image: 'http://bulma.io/images/placeholders/128x128.png',
+    image: 'http://bulma.io/images/bulma-logo.png',
     title: 'vuex:app.name',
+    icons: [
+      {
+        href: 'vuex:github.href',
+        icon: 'fa fa-github'
+      },
+      {
+        href: 'vuex:twitter.href',
+        icon: 'fa fa-twitter'
+      }
+    ],
     items: [
       {
         text: 'Home',

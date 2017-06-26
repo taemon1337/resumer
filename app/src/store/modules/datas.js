@@ -2,14 +2,12 @@ import { DataTypes, MessageTypes } from '../mutation-types'
 import store from '@/store'
 import cryptor from '@/lib/cryptor'
 
-const defaultindex = 0
-
 const state = {
-  all: [
-    require('@/assets/demo.secure.json'),
-    require('@/assets/tps.secure.json')
-  ],
-  current: defaultindex,
+  all: {
+    demo: require('@/assets/demo.secure.json'),
+    tps: require('@/assets/tps.secure.json'),
+    test: require('@/assets/test.secure.js')
+  },
   data: {
     navbar: {},
     user: {},
@@ -26,7 +24,7 @@ const getters = {
   [DataTypes.user]: state => state.data.user,
   [DataTypes.github]: state => state.data.github,
   [DataTypes.twitter]: state => state.data.twitter,
-  [DataTypes.pages]: state => state.data.pages,
+  [DataTypes.pages]: state => state.data.pages || state.data,
   [DataTypes.decrypted]: state => state.decrypted
 }
 
@@ -36,7 +34,7 @@ const actions = {
     let currentkey = sessionStorage.getItem('currentKey')
     let accesskey = sessionStorage.getItem('currentToken')
     if (currentkey) {
-      commit(DataTypes.load, { index: currentkey, password: accesskey })
+      commit(DataTypes.load, { name: currentkey, password: accesskey })
     }
   },
   [DataTypes.load] ({ commit }, opts) {
@@ -52,12 +50,19 @@ const mutations = {
   [DataTypes.load] (state, opts) {
     try {
       store.dispatch(MessageTypes.clear)
-      let merged = Object.assign({}, state.all[opts.index])
+      let merged = Object.assign({}, state.all[opts.name])
       if (opts.password) { merged.secure = Object.assign({}, { password: opts.password }) }
       let json = cryptor.loader(JSON.stringify(merged), true)
-      state.data = JSON.parse(json)
+      let data = JSON.parse(json)
+      if (data.json) {
+        state.data = data
+      } else if (data.jsdb) {
+        state.data = Object.assign({}, data, data.data)
+      } else {
+        console.warn('Invalid State data loaded', data)
+      }
       state.decrypted = true
-      sessionStorage.setItem('currentKey', opts.index)
+      sessionStorage.setItem('currentKey', opts.name)
       sessionStorage.setItem('currentToken', opts.password)
       store.dispatch(MessageTypes.add, { title: 'Successfully unlocked site data!', class: 'notification is-success' })
     } catch (err) {
@@ -65,7 +70,7 @@ const mutations = {
     }
   },
   [DataTypes.lock] (state) {
-    state.data = state.all[defaultindex]
+    state.data = null
     state.decrypted = false
     sessionStorage.removeItem('currentKey')
     sessionStorage.removeItem('currentToken')

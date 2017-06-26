@@ -1,8 +1,9 @@
 <template>
-  <a :class="klass" :href='href'>
-    <img v-if="image" :src='image.src' :alt="image.alt">
+  <a v-if='vif' :class="klass" :href='href'>
+    <img :class="image.klass || ''" v-if="image" :src='image.src' :alt="image.alt">
     <span v-if="text">{{ text }}</span>
-    <span v-if="icon" class="icon"><i class="fa fa-github"></i></span>
+    <span v-if="icon" class="icon has-text-info"><i :class="icon"></i></span>
+    <span v-if='content' v-html='content'></span>
   </a>
 </template>
 
@@ -10,11 +11,18 @@
   export default {
     name: 'DNavbarItem',
     props: {
+      vif: {
+        type: String,
+        default: '1'
+      },
       href: {
         type: String,
         default: '#'
       },
       text: {
+        type: String
+      },
+      content: {
         type: String
       },
       icon: {
