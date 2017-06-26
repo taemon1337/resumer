@@ -3,6 +3,7 @@ let state = {
     name: 'tim.stello.org'
   },
   navbar: {
+    image: 'http://bulma.io/images/placeholders/128x128.png',
     title: 'vuex:app.name',
     items: [
       {
@@ -13,6 +14,11 @@ let state = {
   }
 }
 
+let getters = {
+  database: state => state
+}
+
 export default {
-  state
+  state,
+  getters
 }

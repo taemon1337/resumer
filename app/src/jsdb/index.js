@@ -2,10 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Router from 'vue-router'
 
-import db from './db'
-import layout from './layout'
-import comps from './components'
 import routes from './routes'
+import store from './store'
+import comps from './components'
 
 Vue.use(Router)
 Vue.use(Vuex)
@@ -21,23 +20,27 @@ let injectComponents = function (routes, components) {
   return injectedroutes
 }
 
-let init = function (layout, routes, data, components) {
+let registerComponents = function (comps) {
+  for (let key in comps) { Vue.component(key, comps[key]) }
+  return comps
+}
+
+let init = function (routes, store, components) {
   let router = new Router({ routes: injectComponents(routes, components) })
-  let store = new Vuex.Store({ modules: data })
+  let vuexstore = new Vuex.Store({ modules: store })
 
   window.app = new Vue({
-    el: layout.element,
+    el: '#jsdb',
     router,
-    store,
-    template: layout.template,
-    components: components
+    store: vuexstore,
+    template: '<DApp/>',
+    components: registerComponents(components)
   })
 }
 
 export default {
   init: init,
-  database: db,
-  layout: layout,
+  store: store,
   components: comps,
   routes: routes
 }

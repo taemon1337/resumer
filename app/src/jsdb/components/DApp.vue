@@ -1,6 +1,5 @@
 <template>
   <div class='container'>
-    <h1>D-APP:</h1>
     <div id='jsdb'>
       <router-view></router-view>
     </div>
@@ -12,9 +11,6 @@
     name: 'DApp',
     data () {
       return {}
-    },
-    beforeCreate () {
-      console.log('creating d-app...')
     }
   }
 </script>

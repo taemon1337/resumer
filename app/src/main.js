@@ -7,8 +7,10 @@ import store from './store'
 import Vue2Filters from 'vue2-filters'
 
 import jsdb from '@/jsdb'
-console.log(jsdb)
-window.jsdb = jsdb
+
+window.init = function () {
+  jsdb.init(jsdb.routes, jsdb.store, jsdb.components)
+}
 
 Vue.use(Vue2Filters)
 Vue.config.productionTip = false

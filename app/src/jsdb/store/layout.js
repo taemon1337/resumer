@@ -1,10 +1,11 @@
-export default {
+let state = {
   'element': '#jsdb',
   'template': '<DApp/>',
   'colors': {},
   'styles': {},
   'layout': {
     'component': 'DApp',
+    'klass': 'box',
     'properties': {
       'name': 'vuex:app.name'
     },
@@ -12,14 +13,22 @@ export default {
       {
         'component': 'd-navbar',
         'properties': {
-          'image': 'vuex:profile.image',
-          'title': 'vuex:navbar.title'
+          'left': {
+            'image': {
+              'src': 'vuex:profile.image'
+            },
+            'title': 'vuex:navbar.title'
+          },
+          'right': {
+            'text': 'RIGHT',
+            'klass': 'button'
+          }
         },
         'slots': {
-          'items': {
-            'component': 'd-link',
+          'left': {
+            'component': 'd-navbar-item',
             'properties': {
-              'items': 'vuex:navbar.items'
+              'text': 'Home'
             }
           }
         }
@@ -29,12 +38,16 @@ export default {
         'klass': 'column is-12',
         'properties': {},
         'children': []
-      },
-      {
-        'component': 'd-footer',
-        'properties': {},
-        'children': []
       }
     ]
   }
+}
+
+let getters = {
+  'layout': state => state.layout
+}
+
+export default {
+  state,
+  getters
 }
