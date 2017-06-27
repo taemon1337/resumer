@@ -1,39 +1,43 @@
 <template>
   <div style='margin:7px;padding:7px;'>
-    <section v-if='!decrypted' class='hero is-info'>
-      <div class='hero-body'>
-        <div class='container has-text-centered'>
-          <h1 class='title'>Find and access sites</h1>
-          <h2 class='subtitle'>Search below for a site and view it or unlock it if you have an access key...</h2>
-          <form class='columns' @submit.prevent.stop='filter'>
-            <div class='column is-one-third'></div>
-            <div class='column is-one-third'>
-              <div class="field has-addons">
-                <p class="control">
-                  <input v-bind='query' class="input" type="text" placeholder="Find a repository">
-                </p>
-                <p class="control">
-                  <button type='submit' class="button is-info">Search</button>
-                </p>
-              </div>
-            </div>
-            <div class='column is-one-third'></div>
-          </form>
+    <div v-if='decrypted'>
+      <div v-if='pages.jsdb' class='column'>
+        <div class='container'>
+          <d-app :id='pages.id' :layout='pages.layout' :database='pages.data' :routes='pages.routes'></d-app>
         </div>
       </div>
-    </section>
-    <div class="columns">
-      <div v-if='!decrypted' v-for='(name, index) in filtered' key='index' style='margin:7px;' class="column tile">
-        <site-tile :site='site' :name='name' @activate='submit'></site-tile>
+      <div v-else class='container'>
+        <render-pages :pages='pages'></render-pages>
       </div>
-      <div v-else>
-        <div v-if='pages.jsdb' class='column'>
-          <div class='container'>
-            <d-app :id='pages.id' :layout='pages.layout' :database='pages.data' :routes='pages.routes'></d-app>
+    </div>
+    <div v-else>
+      <section class='hero is-info'>
+        <div class='hero-body'>
+          <div class='container has-text-centered'>
+            <h1 class='title'>Find and access sites</h1>
+            <h2 class='subtitle'>Search below for a site and view it or unlock it if you have an access key...</h2>
+            <form class='columns' @submit.prevent.stop='filter'>
+              <div class='column is-one-third'></div>
+              <div class='column is-one-third'>
+                <div class="field">
+                  <p class="control">
+                    <input class="input" type="text" placeholder="Find a repository">
+                  </p>
+                </div>
+              </div>
+              <div class='column is-one-third'>
+                <span v-if="Object.keys(sites).length > filtered.length" class='tag is-warning is-pulled-left'>
+                  Showing {{ filtered.length }} of {{ Object.keys(sites).length }}
+                  <button @click='search("")' class='delete is-small'></button>
+                </span>
+              </div>
+            </form>
           </div>
         </div>
-        <div v-else class='container'>
-          <render-pages :pages='pages'></render-pages>
+      </section>
+      <div class="columns">
+        <div v-for='(name, index) in filtered' key='index' style='margin:7px;' class="column tile">
+          <site-tile :site='sites[name]' :name='name' @activate='submit'></site-tile>
         </div>
       </div>
     </div>
@@ -50,7 +54,6 @@
   export default {
     data () {
       return {
-        query: '',
         filtered: []
       }
     },
@@ -69,17 +72,17 @@
         e.target.reset()
       },
       filter (e) {
-        let query = e.target.elements[0].value
-        console.log('searching for ' + query + '...')
-        window.sites = this.sites
-        e.target.elements[0].value = ''
+        let el = e.target.elements[0]
+        this.filtered = this.search(el.value)
+        el.value = ''
       },
       search (q) {
-        let filtered = {}
+        let filtered = []
         for (let name in this.sites) {
           let text = JSON.stringify(this.sites[name])
-          if (text.match(q)) {
-            filtered[name]
+          let regex = new RegExp(q, 'ig')
+          if (text.match(regex)) {
+            filtered.push(name)
           }
         }
         return filtered

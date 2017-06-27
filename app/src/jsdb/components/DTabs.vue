@@ -10,7 +10,9 @@
       </div>
     </div>
     <div class='column is-12' v-for='(tab, index) in tabs' key='index' :id="tabId(tab, index)" v-if='isActive(index)'>
-      <slot :name='tabId(tab, index)' props='tab'></slot>
+      <div class='container'>
+        <slot :name='tabId(tab, index)' props='tab'></slot>
+      </div>
     </div>
   </div>
 </template>

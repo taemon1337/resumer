@@ -9,6 +9,7 @@ import DGroup from './DGroup'
 import DLevel from './DLevel'
 import DHeading from './DHeading'
 import DImage from './DImage'
+import DMedia from './DMedia'
 
 export default {
   DApp,
@@ -21,5 +22,6 @@ export default {
   DTabs,
   DLevel,
   DHeading,
-  DImage
+  DImage,
+  DMedia
 }

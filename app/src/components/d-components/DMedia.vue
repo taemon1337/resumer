@@ -1,7 +1,7 @@
 <template>
   <article class='media'>
     <figure v-if='left' class='media-left'>
-      <a :class="left.class || 'image'" target='_blank' :href="computedHref">
+      <a :class="left.klass || 'image'" target='_blank' :href="computedHref">
         <img :src='left.src'>
       </a>
     </figure>
@@ -12,7 +12,7 @@
     </div>
     <div class='media-right'>
       <span v-if='tag' class="tag is-warning">{{ tag }}</span>
-      <a v-if='button' :class="button.class || 'button is-small'" :href='button.href' title='Show in job history'>
+      <a v-if='button' :class="button.klass || 'button is-small'" :href='button.href' title='Show in job history'>
         <span v-if='button.text'>{{ button.text }}</span>
         <span v-if='button.icon' class='icon'><i :class='button.icon'></i></span>
       </a>
