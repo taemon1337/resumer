@@ -1,8 +1,8 @@
 <template>
   <div :class='klass' style='margin:7px 0px;'>
-    <section v-for='(child, index) in children' key='index'>
+    <div v-for='(child, index) in children' key='index' :class='childClass'>
       <d-render v-bind='child'></d-render>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -17,6 +17,10 @@
         type: Array
       },
       klass: {
+        type: String,
+        default: ''
+      },
+      childClass: {
         type: String,
         default: ''
       }

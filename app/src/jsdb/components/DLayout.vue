@@ -15,7 +15,7 @@
     let match = regex.exec(val)
     if (match) {
       // https://stackoverflow.com/questions/6393943/convert-javascript-string-in-dot-notation-into-an-object-reference
-      let rep = lookup(match[1].split('.').reduce((o, i) => o[i], db, templates, args), db, templates, args)
+      let rep = lookup(match[1].split('.').reduce((o, i) => o[i], db), db, templates, args)
       if (typeof rep === 'string') {
         return lookup(val.replace(match[0], rep), db, templates, args) // only if its a string can we do a replace
       } else {
@@ -32,7 +32,13 @@
       return val
     } else if (typeof val === 'string') {
       if (val.indexOf(arg0) >= 0) {
-        return lookup(val.replace(arg0, argument), db, templates, argument)
+        if (typeof argument === 'string') {
+          return lookup(val.replace(arg0, argument), db, templates, argument)
+        } else if (typeof argument === 'object') {
+          return lookup(val.replace(arg0 + '.', '').split('.').reduce((o, i) => o[i], argument), db, templates, argument)
+        } else {
+          console.warn('Unexpected argument type: ', typeof argument, argument)
+        }
       } else {
         return regexlookupall(vuer, val, db, templates, argument)
       }
@@ -54,6 +60,8 @@
       } else {
         return inject(val, db, templates, argument)
       }
+    } else if (typeof val === 'boolean') {
+      return val
     } else {
       console.warn('Invalid Type for Lookup Value: only string, object, array, and falsy supported. type=', typeof val, val)
     }

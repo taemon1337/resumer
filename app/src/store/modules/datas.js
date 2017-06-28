@@ -1,12 +1,11 @@
 import { DataTypes, MessageTypes } from '../mutation-types'
 import store from '@/store'
-import cryptor from '@/lib/cryptor'
+import crypt from '@/lib/crypt'
 
 const state = {
   all: {
-    demo: require('@/assets/demo.secure.json'),
-    tps: require('@/assets/tps.secure.json'),
-    test: require('@/assets/test.secure.js')
+    demo: require('@/assets/demo.crypt.js'),
+    tps: require('@/assets/tps.crypt.js')
   },
   data: {
     navbar: {},
@@ -52,15 +51,9 @@ const mutations = {
       store.dispatch(MessageTypes.clear)
       let merged = Object.assign({}, state.all[opts.name])
       if (opts.password) { merged.secure = Object.assign({}, { password: opts.password }) }
-      let json = cryptor.loader(JSON.stringify(merged), true)
+      let json = crypt.loader(merged, true)
       let data = JSON.parse(json)
-      if (data.json) {
-        state.data = data
-      } else if (data.jsdb) {
-        state.data = Object.assign({}, data, data.data)
-      } else {
-        console.warn('Invalid State data loaded', data)
-      }
+      state.data = Object.assign({}, data, data.data)
       state.decrypted = true
       sessionStorage.setItem('currentKey', opts.name)
       sessionStorage.setItem('currentToken', opts.password)

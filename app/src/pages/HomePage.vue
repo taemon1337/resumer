@@ -6,9 +6,6 @@
           <d-app :id='pages.id' :layout='pages.layout' :database='pages.data' :routes='pages.routes'></d-app>
         </div>
       </div>
-      <div v-else class='container'>
-        <render-pages :pages='pages'></render-pages>
-      </div>
     </div>
     <div v-else>
       <section class='hero is-info'>
@@ -45,7 +42,6 @@
 </template>
 
 <script>
-  import RenderPages from '@/components/RenderPages'
   import SiteTile from '@/components/SiteTile'
   import DApp from '@/jsdb/components/DApp'
   import { DataTypes } from '@/store/mutation-types'
@@ -92,7 +88,6 @@
       this.filtered = Object.keys(this.sites)
     },
     components: {
-      RenderPages,
       SiteTile,
       DApp
     }

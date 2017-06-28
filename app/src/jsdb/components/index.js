@@ -10,6 +10,8 @@ import DLevel from './DLevel'
 import DHeading from './DHeading'
 import DImage from './DImage'
 import DMedia from './DMedia'
+import DTile from './DTile'
+import DCard from './DCard'
 
 export default {
   DApp,
@@ -23,5 +25,7 @@ export default {
   DLevel,
   DHeading,
   DImage,
-  DMedia
+  DMedia,
+  DTile,
+  DCard
 }

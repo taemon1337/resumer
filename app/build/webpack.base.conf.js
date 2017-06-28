@@ -68,10 +68,10 @@ module.exports = {
         }
       },
       {
-        test: /\.secure\.json$/,
+        test: /\.crypt\.js/,
         use: [
           'json-loader',
-          'secure-loader'
+          'crypt-loader'
         ]
       }
     ]
