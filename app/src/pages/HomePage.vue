@@ -8,7 +8,7 @@
       </div>
     </div>
     <div v-else>
-      <section class='hero is-info'>
+      <section class='hero'>
         <div class='hero-body'>
           <div class='container has-text-centered'>
             <h1 class='title'>Find and access sites</h1>

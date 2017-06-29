@@ -94,7 +94,7 @@ let loader = function (content, decryption) {
 
     return JSON.stringify(encrypted, null, 2)
   } else {
-    let secopts = Object.assign(defaults, { public: true }, { decrypt: !!decryption })
+    let secopts = Object.assign({}, defaults, { public: true, decrypt: !!decryption })
     let encrypted = cryptObject(obj, secopts)
     
     return JSON.stringify(encrypted, null, 2)
