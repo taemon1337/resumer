@@ -12,6 +12,12 @@
   import Router from 'vue-router'
   import components from '@/jsdb/components'
 
+  const defaultNavbar = {
+    public: true,
+    left: [{ image: { src: 'http://bulma.io/images/bulma-logo.png' } }, { content: '<p class="title">Default Navbar</p>' }],
+    center: [{ href: 'vuex:github.href', icon: 'fa fa-github' }]
+  }
+
   let injectComponents = function (routes, components) {
     let injectedroutes = []
     routes.forEach(function (route) {
@@ -36,6 +42,10 @@
       id: {
         type: String,
         default: 'app'
+      },
+      navbar: {
+        type: Object,
+        default () { return Object.assign({}, defaultNavbar) }
       },
       components: {
         type: Array

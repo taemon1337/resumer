@@ -13,9 +13,10 @@
       <span></span>
       <span></span>
     </span>
-    <div v-if="right" class="nav-right nav-menu">
-      <d-navbar-item v-for='(item, index) in right' key='index' v-bind="item"></d-navbar-item>
-      <slot name="left" scope="right"></slot>
+    <div class="nav-right nav-menu">
+      <d-navbar-item v-if="right" v-for='(item, index) in right' key='index' v-bind="item"></d-navbar-item>
+      <slot name="right" scope="right"></slot>
+      <d-navbar-item v-if="logout" v-bind="logout"></d-navbar-item>
     </div>
   </nav>
 </template>
@@ -32,6 +33,12 @@
       },
       right: {
         type: Array
+      },
+      logout: {
+        type: Object,
+        default () {
+          return Object.assign({ vif: 'vuex:decrypted', text: 'Logout', event: 'lock', icon: 'fa fa-lock' })
+        }
       }
     },
     data () {

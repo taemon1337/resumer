@@ -1,11 +1,13 @@
 export const DataTypes = {
   init: 'data.init',
   load: 'data.load',
-  all: 'data.all',
+  sites: 'data.sites',
+  siteid: 'data.siteid',
   database: 'data.database',
   layout: 'data.layout',
   routes: 'data.routes',
   navbar: 'data.navbar',
+  templates: 'data.templates',
   decrypted: 'data.decrypted',
   lock: 'data.lock'
 }

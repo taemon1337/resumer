@@ -22,7 +22,20 @@ let lookup = function (val, db, templates, argument) {
   if (!val) {
     return val
   } else if (typeof val === 'string') {
-    if (val.indexOf(arg0) >= 0) {
+    if (val.startsWith('$$')) {
+      if (val === '$$database') {
+        return db
+      } else if (val === '$$layout') {
+        return val
+      } else if (val === '$$templates') {
+        return templates
+      } else if (val === '$$argument') {
+        return argument
+      } else {
+        console.log('Invalid Special value: ', val)
+        return ''
+      }
+    } else if (val.indexOf(arg0) >= 0) {
       if (typeof argument === 'string') {
         return lookup(val.replace(arg0, argument), db, templates, argument)
       } else if (typeof argument === 'object') {

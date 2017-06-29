@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='container has-text-centered' style='position:absolute;top:50px;z-index:999;'>
     <div v-for='(message, idx) in messages' :key='idx' :class="message.class || 'notification'">
       <button @click='remove(idx)' class="delete"></button>
       {{ message.title }}

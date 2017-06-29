@@ -12,6 +12,8 @@ import DImage from './DImage'
 import DMedia from './DMedia'
 import DTile from './DTile'
 import DCard from './DCard'
+import DHero from './DHero'
+import DJson from './DJson'
 
 export default {
   DApp,
@@ -27,5 +29,7 @@ export default {
   DImage,
   DMedia,
   DTile,
-  DCard
+  DCard,
+  DHero,
+  DJson
 }
