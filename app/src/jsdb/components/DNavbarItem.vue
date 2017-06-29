@@ -1,5 +1,5 @@
 <template>
-  <a v-if='vif' :class="klass" :href='href'>
+  <a v-if='vif' @click.stop.prevent='clicked' :class="klass" :href='href'>
     <img :class="image.klass || ''" v-if="image" :src='image.src' :alt="image.alt">
     <span v-if="text">{{ text }}</span>
     <span v-if="icon" class="icon has-text-info"><i :class="icon"></i></span>
@@ -8,6 +8,8 @@
 </template>
 
 <script>
+  import { DataTypes } from '@/store/mutation-types'
+
   export default {
     name: 'DNavbarItem',
     props: {
@@ -31,6 +33,9 @@
       image: {
         type: Object
       },
+      event: {
+        type: String
+      },
       klass: {
         type: String,
         default: 'nav-item'
@@ -38,6 +43,11 @@
     },
     data () {
       return {}
+    },
+    methods: {
+      clicked () {
+        this.$store.dispatch(DataTypes[this.event])
+      }
     }
   }
 </script>

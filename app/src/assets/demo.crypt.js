@@ -2,7 +2,8 @@ let secure = false
 
 let meta = {
   public: true,
-  name: 'Demo'
+  name: 'Demo',
+  keywords: ['demo', 'test', 'example', 'free', 'public']
 }
 
 let routes = [
@@ -14,39 +15,41 @@ let routes = [
 ]
 
 let data = {
+  id: 'demo',
   user: {
     image: '',
     first: 'Test',
     last: 'Tester'
   },
+  github: {
+    href: 'https://github.com'
+  },
+  twitter: {
+    href: 'https://twitter.com'
+  },
   navbar: {
-    image: {
-      src: 'http://bulma.io/images/bulma-logo.png'
-    },
-    title: 'Demo Site',
-    icons: [
+    left: [
       {
-        href: 'vuex:github.href',
-        icon: 'fa fa-github'
+        image: {
+          src: 'http://bulma.io/images/bulma-logo.png'
+        }
       },
       {
-        href: 'vuex:twitter.href',
-        icon: 'fa fa-twitter'
+        content: '<p class="title">Demo Site</p>'
       }
     ],
-    items: [
-      {
-        text: 'Home'
-      },
-      {
-        text: 'Documentation'
-      },
-      {
-        text: 'Blog'
-      },
+    center: [
+      { href: 'vuex:github.href', icon: 'fa fa-github' },
+      { href: 'vuex:twitter.href', icon: 'fa fa-twitter' }
+    ],
+    right: [
+      { text: 'Home' },
+      { text: 'Documentation' },
+      { text: 'Blog' },
       {
         vif: 'vuex:decrypted',
         text: 'Logout',
+        event: 'lock',
         icon: 'fa fa-lock'
       }
     ]

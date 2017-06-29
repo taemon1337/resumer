@@ -1,7 +1,7 @@
 <template>
   <div class='container'>
     <div id="app">
-      <navbar></navbar>
+      <d-navbar v-if='decrypted' v-bind="navbar"></d-navbar>
       <error-messages></error-messages>
       <router-view></router-view>
     </div>
@@ -10,17 +10,24 @@
 
 <script>
   import 'bulma'
-  import Navbar from '@/components/Navbar'
+  import DNavbar from 'd/DNavbar'
   import ErrorMessages from '@/components/ErrorMessages'
   import { DataTypes } from '@/store/mutation-types'
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'app',
     created () {
       this.$store.dispatch(DataTypes.init)
     },
+    computed: {
+      ...mapGetters({
+        navbar: DataTypes.navbar,
+        decrypted: DataTypes.decrypted
+      })
+    },
     components: {
-      Navbar,
+      DNavbar,
       ErrorMessages
     }
   }

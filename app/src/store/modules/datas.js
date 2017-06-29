@@ -1,12 +1,16 @@
 import { DataTypes, MessageTypes } from '../mutation-types'
 import store from '@/store'
 import crypt from '@/lib/crypt'
+import inject from '@/lib/inject'
 
 const state = {
   all: {
     demo: require('@/assets/demo.crypt.js'),
     tps: require('@/assets/tps.crypt.js')
   },
+  layout: {},
+  routes: [],
+  templates: {},
   data: {
     navbar: {},
     user: {},
@@ -19,11 +23,10 @@ const state = {
 // getters
 const getters = {
   [DataTypes.all]: state => state.all,
-  [DataTypes.navbar]: state => state.data.navbar,
-  [DataTypes.user]: state => state.data.user,
-  [DataTypes.github]: state => state.data.github,
-  [DataTypes.twitter]: state => state.data.twitter,
-  [DataTypes.pages]: state => state.data.pages || state.data,
+  [DataTypes.database]: state => state.data,
+  [DataTypes.layout]: state => state.layout,
+  [DataTypes.routes]: state => state.routes,
+  [DataTypes.navbar]: state => inject.inject(state.data.navbar, state.data, state.templates),
   [DataTypes.decrypted]: state => state.decrypted
 }
 
@@ -53,7 +56,10 @@ const mutations = {
       if (opts.password) { merged.secure = Object.assign({}, { password: opts.password }) }
       let json = crypt.loader(merged, true)
       let data = JSON.parse(json)
-      state.data = Object.assign({}, data, data.data)
+      state.data = Object.assign({}, data.data)
+      state.layout = data.layout
+      state.routes = data.routes
+      state.templates = data.templates
       state.decrypted = true
       sessionStorage.setItem('currentKey', opts.name)
       sessionStorage.setItem('currentToken', opts.password)

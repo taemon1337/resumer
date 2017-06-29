@@ -2,11 +2,10 @@ export const DataTypes = {
   init: 'data.init',
   load: 'data.load',
   all: 'data.all',
+  database: 'data.database',
+  layout: 'data.layout',
+  routes: 'data.routes',
   navbar: 'data.navbar',
-  user: 'data.user',
-  github: 'data.github',
-  twitter: 'data.twitter',
-  pages: 'data.pages',
   decrypted: 'data.decrypted',
   lock: 'data.lock'
 }

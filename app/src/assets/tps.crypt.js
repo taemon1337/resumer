@@ -4,7 +4,8 @@ let secure = {
 
 let meta = {
   public: true,
-  name: 'Test'
+  name: 'Test',
+  keywords: ['tim', 'stello', 'resume', 'messiah', 'soccer', 'computer', 'program', 'security', 'docker', 'devops', 'awesome']
 }
 
 let routes = [
@@ -16,10 +17,7 @@ let routes = [
 ]
 
 let data = {
-  id: 'test',
-  app: {
-    name: 'test'
-  },
+  id: 'tps',
   user: {
     image: 'https://lh3.googleusercontent.com/-ZFYuVfqKoIA/AAAAAAAAAAI/AAAAAAAAAAA/AAyYBF6RdKF5SHu-O-Z7UDEQlms4e6rGeQ/s64-c-mo/photo.jpg',
     first: 'Timothy',
@@ -29,10 +27,38 @@ let data = {
     address: '2361 Rutland Rd.<br>Davidsonville, MD  21035'
   },
   github: {
-    href: 'https://github.com'
+    href: 'https://github.com/taemon1337'
   },
   twitter: {
-    href: 'https://twitter.com'
+    href: 'https://twitter.com/taemon1337'
+  },
+  navbar: {
+    left: [
+      {
+        image: {
+          klass: 'image is-round',
+          src: 'vuex:user.image'
+        }
+      },
+      {
+        content: '<p class="title">TIM.STELLO</p>'
+      }
+    ],
+    center: [
+      { href: 'vuex:github.href', icon: 'fa fa-github' },
+      { href: 'vuex:twitter.href', icon: 'fa fa-twitter' }
+    ],
+    right: [
+      { text: 'Home' },
+      { text: 'Documentation' },
+      { text: 'Blog' },
+      {
+        vif: 'vuex:decrypted',
+        text: 'Logout',
+        event: 'lock',
+        icon: 'fa fa-lock'
+      }
+    ]
   },
   tabs: {
     heading: 'Tim has professional experience with each of these components, though not all in a production environment.',
@@ -248,38 +274,6 @@ let data = {
     title: 'Jetty - Servlet Engine and Http Server',
     tag: ' ',
     subtitle: 'Jetty provides a Web server and javax.servlet container'
-  },
-  navbar: {
-    image: {
-      src: 'http://bulma.io/images/bulma-logo.png'
-    },
-    title: 'Demo Site',
-    icons: [
-      {
-        href: 'vuex:github.href',
-        icon: 'fa fa-github'
-      },
-      {
-        href: 'vuex:twitter.href',
-        icon: 'fa fa-twitter'
-      }
-    ],
-    items: [
-      {
-        text: 'Home'
-      },
-      {
-        text: 'Documentation'
-      },
-      {
-        text: 'Blog'
-      },
-      {
-        vif: 'vuex:decrypted',
-        text: 'Logout',
-        icon: 'fa fa-lock'
-      }
-    ]
   },
   jobs: {
     heading: '<p class="title">Job History</p>',

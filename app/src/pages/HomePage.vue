@@ -1,9 +1,9 @@
 <template>
   <div style='margin:7px;padding:7px;'>
     <div v-if='decrypted'>
-      <div v-if='pages.jsdb' class='column'>
+      <div class='column'>
         <div class='container'>
-          <d-app :id='pages.id' :layout='pages.layout' :database='pages.data' :routes='pages.routes'></d-app>
+          <d-app :id='database.id' :layout='layout' :database='database' :routes='routes'></d-app>
         </div>
       </div>
     </div>
@@ -56,7 +56,9 @@
     computed: {
       ...mapGetters({
         sites: DataTypes.all,
-        pages: DataTypes.pages,
+        database: DataTypes.database,
+        layout: DataTypes.layout,
+        routes: DataTypes.routes,
         decrypted: DataTypes.decrypted
       })
     },

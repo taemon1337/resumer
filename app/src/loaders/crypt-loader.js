@@ -21,7 +21,7 @@ function encrypt (str, opts) {
       throw new Error('No key/cipher provided!')
     }
   } catch (err) {
-    console.error('Could not encrypt data', err)
+    console.error('Could not encrypt data', err, str)
     return str
   }
 }
@@ -37,7 +37,7 @@ function decrypt (str, opts) {
       throw new Error('No key/cipher provided!')
     }
   } catch (err) {
-    console.error('Could not decrypt data', err)
+    console.error('Could not decrypt data', err, str)
     return str
   }
 }
@@ -67,7 +67,7 @@ function cryptObject (obj, opts) {
   for (let key in obj) {
     if (obj.hasOwnProperty(key)) {
       let child = obj[key]
-      if (child.public) {
+      if (child.public || opts.public) {
         encrypted[key] = child // only root objects which contain a truthy 'public' key are not encrypted.
       } else {
         // it'd be better to mix some salt into the json string because much of it or its format may be discoverable or known.
@@ -89,12 +89,15 @@ let loader = function (content, decryption) {
 
   if (obj.secure) {
     let secopts = Object.assign(defaults, obj.secure, { decrypt: !!decryption })
-    console.log('CRYPT LOADING: ', secopts)
+    // console.log('CRYPT LOADING: ', secopts)
     let encrypted = cryptObject(obj, secopts)
 
     return JSON.stringify(encrypted, null, 2)
   } else {
-    return JSON.stringify(content, null, 2)
+    let secopts = Object.assign(defaults, { public: true }, { decrypt: !!decryption })
+    let encrypted = cryptObject(obj, secopts)
+    
+    return JSON.stringify(encrypted, null, 2)
   }
 }
 
@@ -104,4 +107,6 @@ loader.prototype = {
   decrypt: decrypt
 }
 
-module.exports = loader
+module.exports = function () {
+  return loader.apply(this, arguments)
+}

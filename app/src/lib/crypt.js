@@ -11,36 +11,24 @@ let defaults = {
 }
 
 function encrypt (str, opts) {
-  try {
-    if (opts.key && opts.algo) {
-      let cipher = crypto.createCipher(opts.algo, opts.key)
-      let encrypted = cipher.update(str, 'utf8', 'hex')
-      encrypted += cipher.final('hex')
-      return encrypted
-    } else {
-      throw new Error('No key/cipher provided!')
-    }
-  } catch (err) {
-    console.error('Could not encrypt data', err)
-    console.error(str)
-    return ''
+  if (opts.key && opts.algo) {
+    let cipher = crypto.createCipher(opts.algo, opts.key)
+    let encrypted = cipher.update(str, 'utf8', 'hex')
+    encrypted += cipher.final('hex')
+    return encrypted
+  } else {
+    throw new Error('No key/cipher provided!')
   }
 }
 
 function decrypt (str, opts) {
-  try {
-    if (opts.key && opts.algo) {
-      let cipher = crypto.createDecipher(opts.algo, opts.key)
-      let cleartext = cipher.update(str, 'hex', 'utf8')
-      cleartext += cipher.final('utf8')
-      return cleartext
-    } else {
-      throw new Error('No key/cipher provided!')
-    }
-  } catch (err) {
-    console.error('Could not decrypt data', err)
-    console.error(str)
-    return '{}'
+  if (opts.key && opts.algo) {
+    let cipher = crypto.createDecipher(opts.algo, opts.key)
+    let cleartext = cipher.update(str, 'hex', 'utf8')
+    cleartext += cipher.final('utf8')
+    return cleartext
+  } else {
+    throw new Error('No key/cipher provided!')
   }
 }
 
@@ -90,7 +78,6 @@ let loader = function (content, decryption) {
 
   if (obj.secure) {
     let secopts = Object.assign(defaults, obj.secure, { decrypt: !!decrypt })
-    console.log('CRYPT LOADING: ', secopts)
     let encrypted = cryptObject(obj, secopts)
 
     return JSON.stringify(encrypted, null, 2)
