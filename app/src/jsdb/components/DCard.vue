@@ -8,6 +8,9 @@
     <div class='card-content'>
       <p v-if='title' class='title'>{{ title }}</p>
       <div v-if='content' class='content' v-html='content'></div>
+      <div v-if='slots' v-for='(slot, name) in slots' key='name'>
+        <slot :name='name' scope='slot'></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -28,6 +31,9 @@
       },
       content: {
         type: String
+      },
+      slots: {
+        type: Object
       }
     },
     data () {
