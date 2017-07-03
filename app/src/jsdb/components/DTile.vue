@@ -4,9 +4,11 @@
     <p v-if='subtitle' class='subtitle'>{{ subtitle }}</p>
     <div v-if='content' v-html='content'></div>
 
-    <template v-if='children.length'>
-      <d-tile v-for='(child, index) in children' key='index' v-bind='child' style='margin:7px;'></d-tile>
-    </template>
+    <div class=''>
+      <template v-if='children.length'>
+        <d-tile v-for='(child, index) in children' key='index' v-bind='child' style='margin:7px;'></d-tile>
+      </template>
+    </div>
   </div>
 </template>
 

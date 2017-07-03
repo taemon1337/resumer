@@ -31,7 +31,12 @@ const getters = {
   [DataTypes.layout]: state => inject.inject(state.current.layout, state.current.database, state.current.templates),
   [DataTypes.routes]: state => state.current.routes,
   [DataTypes.templates]: state => state.current.templates,
-  [DataTypes.navbar]: state => inject.inject(state.current.navbar, state.current.database, state.current.templates)
+  [DataTypes.navbar]: state => inject.inject(state.current.navbar, state.current.database, state.current.templates),
+  [DataTypes.link]: function (state, index) {
+    let siteid = state.sites[index].id
+    let secopts = { salt: '', password: siteid, iterations: 10000, keylen: 32, cipher: 'sha512' }
+    let accesskey = crypt.encrypt(accesskey, { algo: 'aes256', key: crypt.genkey(secopts) })
+  }
 }
 
 // actions

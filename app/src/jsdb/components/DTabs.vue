@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class='column is-12' v-for='(tab, index) in tabs' key='index' :id="tabId(tab, index)" v-if='isActive(index)'>
-      <div class='container'>
+      <div class='content'>
         <slot :name='tabId(tab, index)' props='tab'></slot>
       </div>
     </div>
@@ -27,7 +27,7 @@
       },
       klass: {
         type: String,
-        default: 'tabs column is-12'
+        default: 'tabs'
       }
     },
     data () {

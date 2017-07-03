@@ -9,7 +9,8 @@ export const DataTypes = {
   navbar: 'data.navbar',
   templates: 'data.templates',
   decrypted: 'data.decrypted',
-  lock: 'data.lock'
+  lock: 'data.lock',
+  link: 'data.link'
 }
 
 export const MessageTypes = {

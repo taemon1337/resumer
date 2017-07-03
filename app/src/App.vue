@@ -63,6 +63,30 @@
   .is-round, .is-round img {
     border-radius: 50%;
   }
+  .m1 {
+    margin: 7px;
+  }
+  .m2 {
+    margin: 14px;
+  }
+  .m3 {
+    margin: 21px;
+  }
+  .mb1 {
+    margin-bottom: 7px;
+  }
+  .mt1 {
+    margin-top: 7px;
+  }
+  .p1 {
+    padding: 7px;
+  }
+  .p1 {
+    padding: 14px;
+  }
+  .p1 {
+    padding: 21px;
+  }
   .has-shadow {
     box-shadow:0 2px 3px rgba(10, 10, 10, 0.1);
   }
@@ -95,5 +119,8 @@
   }
   .nav-item img {
     max-height: 3.1rem;
+  }
+  .gray {
+    background-color:rgba(10, 10, 10, 0.1);
   }
 </style>
