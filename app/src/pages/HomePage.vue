@@ -47,6 +47,7 @@
   import { DataTypes } from '@/store/mutation-types'
   import { mapGetters } from 'vuex'
   import { crypt } from '@/lib/crypt'
+  import parseJson from '@/lib/parseJson'
 
   export default {
     data () {
@@ -111,10 +112,8 @@
         this.filtered = this.searchById(this.$route.params.siteid)
       }
       if (siteid && accesskey) {
-        let secopts = { salt: '', password: siteid, iterations: 10000, keylen: 32, cipher: 'sha512' }
-        // console.log(crypt.encrypt(accesskey, { algo: 'aes256', key: crypt.genkey(secopts) }))
-        let deckey = crypt.decrypt(accesskey, { algo: 'aes256', key: crypt.genkey(secopts) })
-        this.$store.dispatch(DataTypes.load, { index: this.filtered[0], password: deckey })
+        let encryptedOptions = parseJson(crypt.decrypt(accesskey, { algo: 'aes256', key: siteid }), null)
+        this.$store.dispatch(DataTypes.load, { index: this.filtered[0], secure: encryptedOptions })
       }
     },
     components: {

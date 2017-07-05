@@ -8,3 +8,11 @@ services:
     command: npm run dev
     ports:
       - 8000:8080
+  phantom:
+    build: ./phantom
+    volumes:
+      - ./phantom:/app
+    working_dir: /app
+    command: node run.js
+    ports:
+      - 9000:8080

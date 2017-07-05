@@ -388,7 +388,7 @@ let layout = {
           djson: {
             component: 'd-json',
             properties: {
-              json: '$$database'
+              json: '$database'
             }
           }
         }

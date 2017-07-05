@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>UrlPdf</title>
+  <meta name="description" content="PhantomJS PDFer">
+  <meta name="author" content="SitePoint">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css" />
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <div class='container'>
+    <form action='/api/render' method='POST'>
+      <p class='title'>Enter Url:</p>
+      <div class="field">
+        <p class="control">
+          <input name="url" class="input" type="text" placeholder="http://...">
+        </p>
+      </div>
+      <div class="field is-grouped">
+        <p class="control">
+          <button type='submit' class="button is-primary">Submit</button>
+        </p>
+        <p class="control">
+          <button type='reset' class="button is-link">Cancel</button>
+        </p>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

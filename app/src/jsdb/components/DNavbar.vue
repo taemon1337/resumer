@@ -37,7 +37,7 @@
       logout: {
         type: Object,
         default () {
-          return Object.assign({ vif: 'vuex:decrypted', text: 'Logout', event: 'lock', icon: 'fa fa-lock' })
+          return Object.assign({ text: 'Logout', event: 'lock', icon: 'fa fa-lock' })
         }
       }
     },

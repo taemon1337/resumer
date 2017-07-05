@@ -12,7 +12,7 @@
   }
 
   function genkey (opts) {
-    return pbkdf2.pbkdf2Sync(opts.password, opts.salt, opts.iterations, opts.keylen, opts.cipher)
+    return pbkdf2.pbkdf2Sync(opts.password, opts.salt, opts.iterations, opts.keylen, opts.cipher).toString('hex')
   }
 
   function encrypt (str, opts) {
@@ -22,7 +22,7 @@
       encrypted += cipher.final('hex')
       return encrypted
     } else {
-      throw new Error('No key/cipher provided!')
+      throw new Error('No key/algorithm provided!')
     }
   }
 
@@ -33,7 +33,7 @@
       cleartext += cipher.final('utf8')
       return cleartext
     } else {
-      throw new Error('No key/cipher provided!')
+      throw new Error('No key/algorithm provided!')
     }
   }
 
@@ -89,17 +89,21 @@
     return encrypted
   }
 
+  let mergeoptions = function (opts1, opts2) {
+    return Object.assign({}, defaults, Object.assign({}, opts1, opts2))
+  }
+
   let loader = function (content, decryption) {
     let obj = parse(content)
     let encrypted = null
     let secopts = null
 
     if (obj.secure) {
-      secopts = Object.assign({}, defaults, obj.secure, { decrypt: !!decryption })
+      secopts = mergeoptions(obj.secure, { decrypt: !!decryption })
       encrypted = cryptObject(obj, secopts)
-      encrypted.secure = Object.assign({}, obj.secure, { password: defaults.password })
+      encrypted.secure = mergeoptions(obj.secure, { password: defaults.password })
     } else {
-      secopts = Object.assign({}, defaults, { public: true, decrypt: !!decryption })
+      secopts = mergeoptions({ public: true, decrypt: !!decryption })
       encrypted = cryptObject(obj, secopts)
       encrypted.secure = false
     }
@@ -112,4 +116,5 @@
   exports.decrypt = decrypt
   exports.cryptObject = cryptObject
   exports.genkey = genkey
+  exports.mergeoptions = mergeoptions
 })(typeof exports === 'undefined' ? this['crypt'] = {} : exports)

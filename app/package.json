@@ -17,6 +17,7 @@
     "axios": "^0.16.2",
     "base64-image-loader": "^1.2.0",
     "bulma": "^0.4.2",
+    "es6-promise": "^4.1.1",
     "json-loader": "^0.5.4",
     "node-sass": "^4.5.3",
     "pbkdf2": "^3.0.12",

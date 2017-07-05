@@ -81,10 +81,10 @@
   .p1 {
     padding: 7px;
   }
-  .p1 {
+  .p2 {
     padding: 14px;
   }
-  .p1 {
+  .p3 {
     padding: 21px;
   }
   .has-shadow {

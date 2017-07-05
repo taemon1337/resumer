@@ -10,7 +10,7 @@ export const DataTypes = {
   templates: 'data.templates',
   decrypted: 'data.decrypted',
   lock: 'data.lock',
-  link: 'data.link'
+  accesslink: 'data.accesslink'
 }
 
 export const MessageTypes = {
