@@ -22,7 +22,7 @@ let lookup = function (val, db, templates, argument) {
   if (!val) {
     return val
   } else if (typeof val === 'string') {
-    if (val.startsWith('$')) {
+    if (val.substr(0, 1) === '$') {
       if (val === '$database') {
         return db
       } else if (val === '$layout') {
