@@ -6,6 +6,7 @@
   <title>UrlPdf</title>
   <meta name="description" content="PhantomJS PDFer">
   <meta name="author" content="SitePoint">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css" />
 
   <!--[if lt IE 9]>
@@ -15,22 +16,63 @@
 
 <body>
   <div class='container'>
-    <form action='/api/render' method='POST'>
-      <p class='title'>Enter Url:</p>
-      <div class="field">
-        <p class="control">
-          <input name="url" class="input" type="text" placeholder="http://...">
-        </p>
+    <div class='columns is-multiline'>
+      <div class='column box is-12'>
+        <form id='form' action='/api/render' method='POST'>
+          <p class='title'>Enter Url:</p>
+          <div class="field">
+            <p class="control">
+              <input name="url" class="input" type="text" placeholder="http://...">
+            </p>
+          </div>
+          <div class="field">
+            <label class="label">Select Format</label>
+            <p class="control">
+              <span class="select">
+                <select name='format'>
+                  <option value='application/pdf'>PDF</option>
+                  <option value='image/png'>PNG</option>
+                  <option value='image/jpg'>JPG</option>
+                </select>
+              </span>
+            </p>
+          </div>
+          <div class="field has-addons">
+          <p class="control">
+            <input id='sizeInput' name='size' class="input" type="text" placeholder="Custom WxH...">
+          </p>
+          <p class="control">
+            <span class="select">
+              <select id='selectSize'>
+                <option value=''>Select</option>
+                <option value='1920x1080'>1920x1080</option>
+                <option value='595x842'>Letter</option>
+                <option value='256x256'>256x256</option>
+                <option value='128x128'>128x128</option>
+                <option value='64x64'>64x64</option>
+                <option value='32x32'>32x32</option>
+                <option value='16x16'>16x16</option>
+              </select>
+            </span>
+          </p>
+        </div>
+          <div class="field is-grouped">
+            <p class="control">
+              <button type='submit' class="button is-primary">Submit</button>
+            </p>
+            <p class="control">
+              <button type='reset' class="button is-link">Cancel</button>
+            </p>
+          </div>
+        </form>
       </div>
-      <div class="field is-grouped">
-        <p class="control">
-          <button type='submit' class="button is-primary">Submit</button>
-        </p>
-        <p class="control">
-          <button type='reset' class="button is-link">Cancel</button>
-        </p>
+      <hr>
+      <div class='container'>
+        <div class='columns is-multiline' id='results'></div>
       </div>
-    </form>
+    </div>
   </div>
+
+  <script src='./main.js'></script>
 </body>
 </html>

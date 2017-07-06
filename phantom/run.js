@@ -7,13 +7,34 @@ var express = require("express")
   , port = process.env.SERVER_PORT || 8080
 ;
 
+function parseFormat (f) {
+  switch (f) {
+    case 'image/png':
+      return 'png';
+    case 'image/jpg':
+    case 'image/jpeg':
+      return 'jpg';
+    default:
+      return 'pdf';
+  }
+}
+
+function parseSize (wxh) {
+  var m = wxh ? wxh.match(/(\d+)x(\d+)/) : null
+  if (m) {
+    return { width: parseInt(m[1]), height: parseInt(m[2]) };
+  } else {
+    return null;
+  }
+}
+
 function rasterize (opts) {
   console.log('RENDERING: ', opts);
   return new Promise(function (success, failure) {
     if (opts.url) {
-      let format = opts.format || 'pdf'
-      let width = opts.width || 595;
-      let height = opts.height || 842;
+      let format = parseFormat(opts.format)
+      let size = parseSize(opts.size)
+      console.log('size and format', size, format);
       let sha256 = crypto.createHash('sha256').update(opts.url).digest('hex');
       let _page = null;
       let _filename = sha256 + '.' + format;
@@ -23,7 +44,9 @@ function rasterize (opts) {
       })
       .then(function (page) {
         _page = page;
-        _page.property('viewportSize', { width: width, height: height });
+        if (size) {
+          _page.property('viewportSize', { width: size.width, height: size.height });
+        }
         return _page.open(opts.url);
       })
       .then(function (status) {
