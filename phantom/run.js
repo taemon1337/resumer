@@ -38,6 +38,7 @@ function rasterize (opts) {
       let sha256 = crypto.createHash('sha256').update(opts.url).digest('hex');
       let _page = null;
       let _filename = sha256 + '.' + format;
+      let _filepath = '/tmp/' + _filename;
     
       phantom.create().then(function (ph) {
         return ph.createPage();
@@ -51,21 +52,21 @@ function rasterize (opts) {
       })
       .then(function (status) {
         if (status === 'success') {
-          return _page.render(_filename);
+          return _page.render(_filepath);
         } else {
           failure(new Error('Problems requesting ' + opts.url + '; status=' + status));
         }
       })
       .then(function () {
-        if (fs.existsSync(_filename)) {
-          let readstream = fs.createReadStream(_filename);
+        if (fs.existsSync(_filepath)) {
+          let readstream = fs.createReadStream(_filepath);
 
           readstream.on('close', function () {
-            fs.unlink(_filename);
+            fs.unlink(_filepath);
           })
           .on('error', function (err) {
             failure(err);
-            fs.unlink(_filename);
+            fs.unlink(_filepath);
           })
 
           success(readstream);

@@ -10,6 +10,10 @@
   let parseMultiple = false;
   let urlregex = new RegExp('(https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*))', 'g')
 
+  function copyToClipboard(text) {
+    window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+  }
+
   function _arrayBufferToString(buf) {
     return String.fromCharCode.apply(null, buf);
   }
@@ -56,13 +60,29 @@
     message.wrapper.style.overflow = 'auto';
     message.header = document.createElement('div')
     message.header.className = 'message-header';
-    message.header.style.overflow = 'auto';
-    message.header.innerHTML = title;
-    message.header.delete = document.createElement('button')
-    message.header.delete.className = 'delete'
+    message.header.innerHTML = title.toString().substring(0, 50) + '...';
+    message.header.setAttribute('title', title);
+    message.header.delete = document.createElement('a')
+    message.header.delete.className = 'image';
+    message.header.delete.href = '#';
+    message.header.delete.innerHTML = '<span class="fa fa-remove"></span>';
     message.header.delete.style.position = 'relative';
     message.header.delete.style.right = '10px;';
-    message.header.delete.addEventListener('click', function () { message.remove(); });
+    message.header.delete.addEventListener('click', function (e) { e.preventDefault(); message.remove(); });
+    message.header.copyButton = document.createElement('a');
+    message.header.copyButton.className = 'image';
+    message.header.copyButton.href = '#';
+    message.header.copyButton.style.position = 'relative';
+    message.header.copyButton.style.right = '15px;';
+    message.header.copyButton.innerHTML = '<span class="fa fa-copy"></span>';
+    message.header.copyButton.addEventListener('click', function (e) { e.preventDefault(); copyToClipboard(message.body.lastChild.lastChild.src) });
+    message.header.downloadButton = document.createElement('a');
+    message.header.downloadButton.className = 'image';
+    message.header.downloadButton.href = '#';
+    message.header.downloadButton.innerHTML = '<span class="fa fa-download"></span>';
+    message.header.downloadButton.style.position = 'relative';
+    message.header.downloadButton.style.right = '20px;';
+    message.header.downloadButton.addEventListener('click', function (e) { e.preventDefault(); window.open(message.body.lastChild.lastChild.src, '_blank') });
     message.body = document.createElement('div')
     message.body.className = 'message-body';
     message.body.style.height = (400 - message.header.style.height) + 'px';
@@ -70,6 +90,8 @@
     message.body.innerHTML = '<span class="fa fa-spinner fa-spin"></span>';
 
     message.wrapper.appendChild(message.header);
+    message.header.appendChild(message.header.copyButton);
+    message.header.appendChild(message.header.downloadButton);
     message.header.appendChild(message.header.delete);
     message.wrapper.appendChild(message.body);
     message.appendChild(message.wrapper);

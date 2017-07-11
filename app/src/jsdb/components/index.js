@@ -14,6 +14,7 @@ import DTile from './DTile'
 import DCard from './DCard'
 import DHero from './DHero'
 import DJson from './DJson'
+import DClickTo from './DClickTo'
 
 export default {
   DApp,
@@ -31,5 +32,6 @@ export default {
   DTile,
   DCard,
   DHero,
-  DJson
+  DJson,
+  DClickTo
 }
