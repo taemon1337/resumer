@@ -1,8 +1,10 @@
 <template>
   <div :class='computedClass'>
-    <p v-if='title' class='title'>{{ title }}</p>
-    <p v-if='subtitle' class='subtitle'>{{ subtitle }}</p>
-    <div v-if='content' v-html='content'></div>
+    <article class='tile is-child'>
+      <p v-if='title' class='title'>{{ title }}</p>
+      <p v-if='subtitle' class='subtitle'>{{ subtitle }}</p>
+      <div v-if='content' v-html='content'></div>
+    </article>
 
     <div class=''>
       <template v-if='children.length'>

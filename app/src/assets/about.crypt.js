@@ -2,7 +2,7 @@ let secure = false
 
 let meta = {
   public: true,
-  title: 'About',
+  title: 'About this website',
   subtitle: '',
   keywords: ['help', 'about', 'readme', 'instruct', 'question', 'site', 'why', 'how', 'example']
 }
@@ -19,6 +19,11 @@ let database = {
   user: {},
   github: {
     href: 'https://github.com/taemon1337/resumer'
+  },
+  about: {
+    title: 'What am I looking at?',
+    subtitle: 'Why and what is going on?',
+    content: 'This site was created to be a simple online presence for its creator, specifically to hold static site data in an encrypted format which could be unlocked by anyone with a valid access key.'
   },
   headings: [
     { component: 'd-heading', properties: { heading: '', klass: 'title', content: 'About this application' } },
@@ -52,9 +57,19 @@ let layout = {
     klass: 'box',
     children: [
       {
-        component: 'd-level',
+        component: 'd-tile',
         properties: {
-          items: 'vuex:headings'
+          title: 'vuex:about.title',
+          subtitle: 'vuex:about.subtitle',
+          content: 'vuex:about.content',
+          children: [
+            {
+              component: 'd-level',
+              properties: {
+                items: 'vuex:headings'
+              }
+            }
+          ]
         }
       }
     ]

@@ -1,5 +1,5 @@
 <template>
-  <article class="media">
+  <article :class="klass">
     <figure v-if='left' class='media-left'>
       <a v-if="left.image" :class="left.klass || 'image is-64x64'" target='_blank' :href="computedHref">
         <img :src='left.image.src' :alt='left.image.alt'>
@@ -56,6 +56,10 @@
       },
       button: {
         type: Object
+      },
+      klass: {
+        type: String,
+        default: 'media'
       }
     },
     data () {

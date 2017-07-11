@@ -3,6 +3,12 @@
   let form = document.getElementById('form');
   let selectsize = document.getElementById('selectSize');
   let sizeinput = document.getElementById('sizeInput');
+  let singleUrlInput = document.getElementById('single-url-input');
+  let multipleUrlInput = document.getElementById('multiple-url-input');
+  let singleUrlDiv = document.getElementById('single-url-div');
+  let multipleUrlDiv = document.getElementById('multiple-url-div');
+  let parseMultiple = false;
+  let urlregex = new RegExp('(https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*))', 'g')
 
   function _arrayBufferToString(buf) {
     return String.fromCharCode.apply(null, buf);
@@ -18,6 +24,28 @@
       return window.btoa( binary );
   }
 
+  function getNewFormData (f) {
+    let fd = new FormData();
+    for (var i = 0; i < f.elements.length - 1; i++) {
+      if (f.elements[i].name) {
+        if (f.elements[i].value) {
+          fd.append(f.elements[i].name, f.elements[i].value)
+        }
+      }
+    }
+    return fd;
+  }
+
+  function parseUrlsFromContent (content) {
+    let urls = [];
+    let match = urlregex.exec(content)
+    while (match) {
+      urls.push(match[1])
+      match = urlregex.exec(content)
+    }
+    return urls;
+  }
+
   function createResultDiv (title) {
     var message = document.createElement('div');
     message.className = 'column';
@@ -25,6 +53,7 @@
     message.wrapper = document.createElement('div');
     message.wrapper.className = 'message';
     message.wrapper.style.height = '400px;'
+    message.wrapper.style.overflow = 'auto';
     message.header = document.createElement('div')
     message.header.className = 'message-header';
     message.header.style.overflow = 'auto';
@@ -93,6 +122,60 @@
         return buildObject(data, type, formdata)
     }
   }
+  
+  function sendForm (method, url, formdata, success, failure, next, arg) {
+    console.log('Sending Form: ', method, url)
+    var http = new XMLHttpRequest();
+    http.responseType = 'arraybuffer';
+
+    http.open(method, url, true);
+    // http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.onreadystatechange = function() {//Call a function when the state changes.
+      if (http.readyState === 4) {
+        var abuffer = new Uint8Array(this.response);
+        if (http.status === 200) {
+          success(abuffer, formdata, arg);
+        } else {
+          failure(abuffer, formdata, arg);
+        }
+        if (next && typeof next === 'function') { next() }
+      }
+    }
+    http.send(formdata);
+  }
+  
+  function sendNext (formdata, success, failure, next) {
+    var div = createResultDiv(formdata.get('url'));
+    results.appendChild(div);
+    sendForm(form.method, form.action, formdata, success, failure, next, div);
+  }
+  
+  function successCallback (buffer, formdata, element) {
+    element.body.innerHTML = '';
+    var format = formdata.get('format');
+    var datauri = 'data:' + format + ';base64,' + _arrayBufferToBase64(buffer);
+    var out = buildOutput(datauri, format, formdata);
+    element.body.appendChild(out)
+  }
+  
+  function failureCallback (buffer, formdata, element) {
+    element.body.appendChild(buildNotice(_arrayBufferToString(buffer)));
+    setTimeout(function () {
+      element.remove();
+    }, 5000)
+  }
+
+  singleUrlInput.addEventListener('change', function (e) {
+    singleUrlDiv.style.display = "";
+    multipleUrlDiv.style.display = "none";
+    parseMultiple = false;
+  })
+
+  multipleUrlInput.addEventListener('change', function (e) {
+    singleUrlDiv.style.display = "none";
+    multipleUrlDiv.style.display = "";
+    parseMultiple = true;
+  })
 
   selectsize.addEventListener('change', function (e) {
     sizeinput.value = e.target.value;
@@ -100,35 +183,26 @@
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var div = createResultDiv(form.elements[0].value);
-    results.appendChild(div);
     var fd = new FormData();
-    var http = new XMLHttpRequest();
-    http.responseType = 'arraybuffer';
     for (var i = 0; i < form.elements.length - 1; i++) {
       if (form.elements[i].name) {
         fd.append(form.elements[i].name, form.elements[i].value)
       }
     }
-    http.open(form.method, form.action, true);
-    // http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    http.onreadystatechange = function() {//Call a function when the state changes.
-      if (http.readyState === 4) {
-        div.body.innerHTML = '';
-        var abuffer = new Uint8Array(this.response);
-        if (http.status === 200) {
-          var format = fd.get('format');
-          var datauri = 'data:' + format + ';base64,' + _arrayBufferToBase64(abuffer);
-          var out = buildOutput(datauri, format, fd);
-          div.body.appendChild(out)
-        } else {
-          div.body.appendChild(buildNotice(_arrayBufferToString(abuffer)));
-          setTimeout(function () {
-            div.remove();
-          }, 5000)
+
+    if (parseMultiple) {
+      let urls = parseUrlsFromContent(fd.get('urls'))
+      
+      let next = function (j) {
+        if (urls[j]) {
+          let formdata = getNewFormData(form);
+          formdata.append('url', urls[j]);
+          sendNext(formdata, successCallback, failureCallback, next(j + 1));
         }
       }
+      next(0)
+    } else {
+      sendNext(fd, successCallback, failureCallback, null);
     }
-    http.send(fd);
   })
 })();
